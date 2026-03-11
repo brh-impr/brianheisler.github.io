@@ -5,9 +5,12 @@ export function generateStaticParams() {
   return newsItems.map((item) => ({ slug: item.slug }));
 }
 
-
-export default function NewsDetailPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function NewsDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
   const item = newsItems.find((entry) => entry.slug === slug);
 
   if (!item) return notFound();
