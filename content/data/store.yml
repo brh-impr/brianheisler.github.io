@@ -1,0 +1,6 @@
+products:
+  - name: "Replica Jersey"
+    slug: "replica-jersey"
+    price: "$89"
+    image: ""
+    buy_url: ""

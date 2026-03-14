@@ -1,0 +1,19 @@
+hero_eyebrow: "Club-Level College Hockey"
+hero_title: "Hockey for fans, players, and future recruits."
+hero_text: "Follow the season, meet the roster, register for events, and support the team."
+hero_image: ""
+
+featured_stats:
+  - label: "Overall Record"
+    value: "18-7-2"
+  - label: "Conference Record"
+    value: "11-3-1"
+  - label: "Goals Per Game"
+    value: "4.1"
+  - label: "Save %"
+    value: ".921"
+
+primary_cta_label: "View Schedule"
+primary_cta_link: "/schedule"
+secondary_cta_label: "Recruiting Info"
+secondary_cta_link: "/recruiting"

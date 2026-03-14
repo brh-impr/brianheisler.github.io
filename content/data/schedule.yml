@@ -1,0 +1,9 @@
+games:
+  - opponent: "Rival University"
+    date: "2026-10-10"
+    time: "7:00 PM"
+    location: "Home"
+    rink: "Newington Ice Arena"
+    result: ""
+    livestream_url: ""
+    ticket_url: ""

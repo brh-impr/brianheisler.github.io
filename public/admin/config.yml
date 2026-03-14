@@ -1,0 +1,167 @@
+backend:
+  name: github
+  repo: brh-impr/brh-impr.github.io
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+site_url: "https://brh-impr.github.io"
+display_url: "https://brh-impr.github.io"
+
+publish_mode: simple
+
+collections:
+  - name: "news"
+    label: "News"
+    label_singular: "News Post"
+    folder: "content/news"
+    create: true
+    slug: "{{slug}}"
+    format: "frontmatter"
+    extension: "md"
+    preview_path: "news/{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Featured Image", name: "featured_image", widget: "image", required: false }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "players"
+    label: "Players"
+    label_singular: "Player"
+    folder: "content/players"
+    create: true
+    slug: "{{slug}}"
+    extension: "yml"
+    format: "yml"
+    identifier_field: "name"
+    summary: "#{{number}} {{name}} — {{position}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string", hint: "Used in the player page URL, e.g. jack-morrison" }
+      - { label: "Number", name: "number", widget: "number", value_type: "int", min: 0 }
+      - { label: "Position", name: "position", widget: "select", options: ["F", "D", "G"] }
+      - { label: "Year", name: "year", widget: "select", options: ["Freshman", "Sophomore", "Junior", "Senior", "Graduate"] }
+      - { label: "Hometown", name: "hometown", widget: "string" }
+      - { label: "Shoots", name: "shoots", widget: "select", options: ["Left", "Right"], required: false }
+      - { label: "Previous Team", name: "previous_team", widget: "string", required: false }
+      - { label: "Major", name: "major", widget: "string", required: false }
+      - { label: "Player Image", name: "image", widget: "image", required: false }
+      - { label: "Bio", name: "bio", widget: "text", required: false }
+
+  - name: "events"
+    label: "Events"
+    label_singular: "Event"
+    folder: "content/events"
+    create: true
+    slug: "{{slug}}"
+    extension: "yml"
+    format: "yml"
+    identifier_field: "title"
+    summary: "{{title}} — {{date}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Price", name: "price", widget: "string", required: false }
+      - { label: "Registration Open", name: "registration_open", widget: "boolean", default: true }
+      - { label: "Registration URL", name: "registration_url", widget: "string", required: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Description", name: "description", widget: "markdown" }
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "About Page"
+        name: "about"
+        file: "content/pages/about.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - label: "Recruiting Page"
+        name: "recruiting"
+        file: "content/pages/recruiting.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Image", name: "hero_image", widget: "image", required: false }
+          - { label: "Contact Email", name: "contact_email", widget: "string", required: false }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "data"
+    label: "Site Data"
+    files:
+      - label: "Schedule"
+        name: "schedule"
+        file: "content/data/schedule.yml"
+        fields:
+          - label: "Games"
+            name: "games"
+            widget: "list"
+            summary: "{{fields.date}} — {{fields.opponent}}"
+            fields:
+              - { label: "Opponent", name: "opponent", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Time", name: "time", widget: "string" }
+              - { label: "Location", name: "location", widget: "select", options: ["Home", "Away", "Neutral"] }
+              - { label: "Rink", name: "rink", widget: "string" }
+              - { label: "Result", name: "result", widget: "string", required: false }
+              - { label: "Livestream URL", name: "livestream_url", widget: "string", required: false }
+              - { label: "Ticket URL", name: "ticket_url", widget: "string", required: false }
+
+      - label: "Store"
+        name: "store"
+        file: "content/data/store.yml"
+        fields:
+          - label: "Products"
+            name: "products"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Slug", name: "slug", widget: "string" }
+              - { label: "Price", name: "price", widget: "string" }
+              - { label: "Image", name: "image", widget: "image", required: false }
+              - { label: "Buy URL", name: "buy_url", widget: "string", required: false }
+
+  - name: "settings"
+    label: "Settings"
+    files:
+      - label: "Homepage"
+        name: "homepage"
+        file: "content/settings/homepage.yml"
+        fields:
+          - { label: "Hero Eyebrow", name: "hero_eyebrow", widget: "string" }
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Text", name: "hero_text", widget: "text" }
+          - { label: "Hero Image", name: "hero_image", widget: "image", required: false }
+          - label: "Featured Stats"
+            name: "featured_stats"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Value", name: "value", widget: "string" }
+          - { label: "Primary CTA Label", name: "primary_cta_label", widget: "string" }
+          - { label: "Primary CTA Link", name: "primary_cta_link", widget: "string" }
+          - { label: "Secondary CTA Label", name: "secondary_cta_label", widget: "string" }
+          - { label: "Secondary CTA Link", name: "secondary_cta_link", widget: "string" }
+
+      - label: "Site Settings"
+        name: "site"
+        file: "content/settings/site.yml"
+        fields:
+          - { label: "Site Name", name: "site_name", widget: "string" }
+          - { label: "Site URL", name: "site_url", widget: "string" }
+          - { label: "Contact Email", name: "contact_email", widget: "string" }
+          - { label: "Recruiting Email", name: "recruiting_email", widget: "string", required: false }
+          - { label: "Instagram URL", name: "instagram_url", widget: "string", required: false }
+          - { label: "YouTube URL", name: "youtube_url", widget: "string", required: false }
+          - { label: "X URL", name: "x_url", widget: "string", required: false }
+          - { label: "Home Rink", name: "home_rink", widget: "string", required: false }
+          - { label: "Club Disclaimer", name: "club_disclaimer", widget: "text" }
+          - { label: "Logo", name: "logo", widget: "image", required: false }
