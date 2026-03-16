@@ -31,7 +31,7 @@ export default function RootLayout({
           {`
             if (window.netlifyIdentity) {
               window.netlifyIdentity.init({
-                APIUrl: "${NETLIFY_IDENTITY_API_URL}"
+                APIUrl: "https://extraordinary-youtiao-cada53.netlify.app/.netlify/identity"
               });
             }
           `}
