@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: brh-impr/brh-impr.github.io
+  name: git-gateway
   branch: main
 
 media_folder: "public/uploads"
