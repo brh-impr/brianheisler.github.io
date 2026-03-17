@@ -1,8 +1,7 @@
-import { getSchedule } from "@/lib/content";
+import { getScheduleFromSheet } from "@/lib/content";
 
-export default function SchedulePage() {
-  const schedule = getSchedule();
-  const games = schedule.games;
+export default async function SchedulePage() {
+  const games = await getScheduleFromSheet();
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
@@ -31,7 +30,7 @@ export default function SchedulePage() {
           </thead>
           <tbody className="divide-y divide-slate-100">
             {games.map((game) => (
-              <tr key={`${game.date}-${game.opponent}`}>
+              <tr key={game.id}>
                 <td className="px-5 py-4">{game.date}</td>
                 <td className="px-5 py-4 font-semibold">{game.opponent}</td>
                 <td className="px-5 py-4">

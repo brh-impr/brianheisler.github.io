@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import yaml from "js-yaml";
+import Papa from "papaparse";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 
@@ -270,4 +271,28 @@ export function getAboutPage(): ContentPage | null {
 
 export function getRecruitingPage(): ContentPage | null {
   return getPageBySlug("recruiting");
+}
+
+export async function getScheduleFromSheet(): Promise<
+  Array<ScheduleGame & { id: string }>
+> {
+  const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzKcL42kKLA681-_-upPJhPAV1cJ_U1DbhqD3jmjhLciDVXvE1oI7Cnuva9aSH7ONZ-sUciWes85dG/pub?gid=0&single=true&output=csv";
+
+  const res = await fetch(url, { cache: "force-cache" });
+  const text = await res.text();
+
+  const parsed = Papa.parse(text, {
+    header: true,
+    skipEmptyLines: true,
+  });
+
+  return parsed.data.map((game: any, index: number) => ({
+    id: index.toString(),
+    opponent: game.opponent,
+    date: game.date,
+    time: game.time,
+    location: game.location,
+    rink: game.rink,
+    result: game.result || null,
+  }));
 }
